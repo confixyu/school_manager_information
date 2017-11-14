@@ -1,0 +1,29 @@
+
+<!--View page of a specific teacher or a view of complete information-->
+
+<h2>Mostrar profesor</h2>
+
+<p>Identificación: <%= @teacher.identification %></p>
+
+<p>Nombre: <%= @teacher.name %> <%= @teacher.lastname %></p>
+
+<p>Género: <%= @teacher.gender %></p>
+
+<p>Cursos: </p>
+
+
+	<% @teacher.courses.each do |course| %>
+		<ul>
+			<li><%=link_to course.name, course %></li>
+		</ul>
+	<% end %>
+
+	<% if @teacher.courses.blank? %>
+		<p>No tiene curso asignado, asignar un <%= link_to "Cursos", courses_path %></p>
+	<% end %>
+
+
+
+<%= link_to "Volver", teachers_path, class: 'btn btn-primary' %>
+<%= link_to "Modificar", edit_teacher_path(@teacher), class: 'btn btn-primary' %>
+<%= link_to "Eliminar", @teacher, method: :delete, data: {confirm: '¿Esta seguro de eliminar este profesor?'}, class: 'btn btn-danger' %>

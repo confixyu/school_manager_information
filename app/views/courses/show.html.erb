@@ -1,0 +1,67 @@
+
+
+<!--View page of a specific course or a view of complete information-->
+<h2>Información del curso <%= @course.name %></h2>
+
+<p>Identificación: <%= @course.codigo%></p>
+
+<p>Nombre: <%= @course.name %> </p>
+
+<p>Género: <%= @course.observation %></p>
+
+
+ <div>
+    <h2>Profesores</h2>
+    <table id="tableStudent" style="text-align: center;" class="table table-striped">
+      <tr>
+        <th>Identificación</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+      </tr>
+
+      <% @course.teachers.each do |t| %>
+
+      <tr>
+        <td><%= t.identification %></td>
+        <td><%= t.name %></td>
+        <td><%= t.lastname %></td>
+      </tr>
+
+      <% end %>
+    </table>
+
+    <% if @course.teachers.blank? %>
+				<h3>No tiene profesor asignado</h3>
+			<% end %>
+  </div>
+
+  <br><br>
+
+  <div>
+    <h2>Estudiantes</h2>
+    <table id="tableStudent" style="text-align: center;" class="table table-striped">
+      <tr>
+        <th>Identificación</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+      </tr>
+
+      <% @course.students.each do |s| %>
+
+      <tr>
+        <td><%= s.identification %></td>
+        <td><%= s.name %></td>
+        <td><%= s.lastname %></td>
+      </tr>
+
+      <% end %>
+    </table>
+
+    <% if @course.students.blank? %>
+				<h3>No tiene estudiantes asignado</h3>
+			<% end %>
+  </div>
+
+<%= link_to "Volver", courses_path, class: 'btn btn-primary' %>
+<%= link_to "Modificar", edit_course_path(@course), class: 'btn btn-primary' %>
+<%= link_to "Eliminar", @course, method: :delete, data: {confirm: '¿Esta seguro de eliminar este profesor?'}, class: 'btn btn-danger' %>

@@ -1,0 +1,88 @@
+
+<!--Parcial view, form for create record or edit record for course-->
+
+<h2 class="margin_top">Formulario de <%= name %> cursos</h2>
+
+<%= form_for(@course) do |f| %>
+
+  <div class="form-group row margin_top">
+    <div class="col-md-10">
+      <%= f.text_field :codigo, placeholder: "Código" %>
+    </div>
+  </div>
+
+  <br>
+ 
+ <div class="form-group row">
+    <div class="col-md-10">
+      <%= f.text_field :name, placeholder: "Nombre del cursos" %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="form-group row">
+    <div class="col-md-10">
+      <%= f.text_field :observation, placeholder: "Observaciones" %>
+    </div>
+  </div>
+
+  <br>
+
+  <div> <!--This block of dive is showing al the record from theacher's table of the database to be a check box option-->
+    <label>Agregar profesores</label>
+    <table id="tableStudent" style="text-align: center;" class="table table-striped">
+      <tr>
+        <th style="width: 30px;">Selección</th>
+        <th>Identificación</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+      </tr>
+
+      <% @teachers.each do |teacher| %>
+
+      <tr>
+        <td>
+          <%= check_box_tag "teachers[]", teacher.id, @course.teachers.include?(teacher) %>
+        </td>
+        <td><%= teacher.identification %></td>
+        <td><%= teacher.name %></td>
+        <td><%= teacher.lastname %></td>
+      </tr>
+
+      <% end %>
+    </table>
+  </div>
+
+  <div> <!--This block of dive is showing al the record from student's table of the database to be a check box option-->
+    <label>Agregar estudiantes</label>
+    <table id="tableStudent" style="text-align: center;" class="table table-striped">
+      <tr>
+        <th style="width: 30px;">Selección</th>
+        <th>Identificación</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+      </tr>
+
+      <% @students.each do |student| %>
+
+      <tr>
+        <td><%= check_box_tag "students[]", student.id, @course.students.include?(student) %></td>
+        <td><%= student.identification %></td>
+        <td><%= student.name %></td>
+        <td><%= student.lastname %></td>
+      </tr>
+
+      <% end %>
+    </table>
+  </div>
+
+  <br>
+
+  <div class="form-group row">
+    <p>
+    <%= f.submit submitLabel, class:"btn btn-primary form_btn" %>  <%= link_to "Volver", courses_path, class: 'btn btn-primary' %>
+    </p>
+  </div>
+<% end %>
+

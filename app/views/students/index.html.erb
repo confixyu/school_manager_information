@@ -1,0 +1,43 @@
+
+
+<!--Index Page for students section -->
+
+<h2>Sección de Estudiantes</h2>
+
+<br>
+
+<%= link_to "Agregar estudiante", new_student_path(@student), class: 'btn btn-primary' %>
+
+<br>
+
+<table id="tableStudent">
+	<tr>
+		<th>Identificación</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Género</th>
+		<th>Opciones</th>
+	</tr>
+
+	<% @students.each do |student| %>
+
+	<tr>
+		<td><%= student.identification %></td>
+		<td><%= student.name %></td>
+		<td><%= student.lastname %></td>
+		<td><%= student.gender %></td>
+
+		<td>
+			<%= link_to "Ver", student, class: 'btn btn-primary' %>
+			<%= link_to "Modificar", edit_student_path(student), class: 'btn btn-primary' %>
+			<%= link_to "Eliminar", student, method: :delete, data: {confirm: '¿Esta seguro de eliminar este estudiante?'}, class: 'btn btn-danger' %>
+		</td> 
+	</tr>
+
+	<% end %>
+
+</table>
+
+<% if @students.blank? %>
+	<h2>No hay registro en la base de dato</h2>
+<% end %>

@@ -1,0 +1,26 @@
+
+<!--View page of a specific student or a view of complete information-->
+
+<h2>Información del estudiantes <%= @student.name %> <%= @student.lastname %></h2>
+
+<p>Identificación: <%= @student.identification %></p>
+
+<p>Nombre: <%= @student.name %> <%= @student.lastname %></p>
+
+<p>Género: <%= @student.gender %></p>
+
+<p>Cursos: </p>
+
+<% @student.courses.each do |course| %>
+	<ul>
+		<li><%=link_to course.name, course %></li>
+	</ul>
+<% end %>
+
+<% if @student.courses.blank? %>
+		<p>No tiene curso asignado, asignar un <%= link_to "Cursos", courses_path %></p>
+	<% end %>
+
+<%= link_to "Volver", students_path, class: 'btn btn-primary' %>
+<%= link_to "Modificar", edit_student_path(@student), class: 'btn btn-primary' %>
+<%= link_to "Eliminar", @student, method: :delete, data: {confirm: '¿Esta seguro de eliminar este estudiante?'}, class: 'btn btn-danger' %>

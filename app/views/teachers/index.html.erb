@@ -1,0 +1,43 @@
+
+<!--Index Page for teachers section -->
+
+<h2>Sección de profesores</h2>
+
+<br>
+
+<%= link_to "Agregar profesor", new_teacher_path(@student), class: 'btn btn-primary' %>
+
+<br>
+
+<table id="tableStudent">
+	<tr>
+		<th>Identificación</th>
+		<th>Nombre</th>
+		<th>Apellido</th>
+		<th>Género</th>
+		<th>Opciones</th>
+	</tr>
+
+	<% @teachers.each do |teacher| %>
+
+	<tr>
+		<td><%= teacher.identification %></td>
+		<td><%= teacher.name %></td>
+		<td><%= teacher.lastname %></td>
+		<td><%= teacher.gender %></td>
+
+		<td>
+			<%= link_to "Ver", teacher, class: 'btn btn-primary' %>
+			<%= link_to "Modificar", edit_teacher_path(teacher), class: 'btn btn-primary' %>
+			<%= link_to "Eliminar", teacher, method: :delete, data: {confirm: '¿Esta seguro de eliminar este profesor?'}, class: 'btn btn-danger' %>
+		</td> 
+	</tr>
+	<% end %>
+
+
+</table>
+
+
+	<% if @teachers.blank? %>
+		<h2>No hay registro en la base de dato</h2>
+	<% end %>

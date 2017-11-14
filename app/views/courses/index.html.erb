@@ -1,0 +1,46 @@
+
+
+<!--Index Page for course section -->
+
+
+<h2>Sección de curso</h2>
+
+<br>
+
+
+<%= link_to "Agregar curso", new_course_path(@curso), class: 'btn btn-primary' %>
+
+<br>
+
+<table id="tableStudent">
+	<tr>
+		<th>Código</th>
+		<th>Nombre</th>
+		<th>Observación</th>
+		<th>Opciones</th>
+	</tr>
+
+	<% @courses.each do |course| %>
+
+	<tr>
+		<td><%= course.codigo %></td>
+		<td><%= course.name %></td>
+		<td><%= course.observation %></td>
+
+		<td>
+			<%= link_to "Ver", course, class: 'btn btn-primary' %>
+			<%= link_to "Modificar", edit_course_path(course), class: 'btn btn-primary' %>
+			<%= link_to "Eliminar", course, method: :delete, data: {confirm: '¿Esta seguro de eliminar este curso'}, class: 'btn btn-danger' %>
+		</td> 
+	</tr>
+	<% end %>
+
+
+</table>
+
+
+	<!--Alert when do not have record in data base-->
+
+	<% if @courses.blank? %>
+		<h2>No hay registro en la base de dato</h2>
+	<% end %>
